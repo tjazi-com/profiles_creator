@@ -1,6 +1,6 @@
 package Controller_Tests;
 
-import com.tjazi.profilescreator.service.Controller.IndexController;
+import com.tjazi.profilescreator.service.controller.IndexController;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

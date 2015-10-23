@@ -22,7 +22,11 @@
 
     <dependencies>
         <!-- Tjazi dependencies -->
-
+        <dependency>
+            <groupId>com.tjazi.profilescreator</groupId>
+            <artifactId>messages</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <!-- Spring dependencies -->
         <dependency>

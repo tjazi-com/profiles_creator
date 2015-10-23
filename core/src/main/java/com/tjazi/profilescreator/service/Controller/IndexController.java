@@ -1,4 +1,4 @@
-package com.tjazi.profilescreator.service.Controller;
+package com.tjazi.profilescreator.service.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Created by kr329462 on 22/10/2015.
+ * Created by Krzysztof Wasiak on 22/10/2015.
  */
 
 @Controller

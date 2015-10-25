@@ -32,8 +32,8 @@
       <file leaf-file-name="ProfilesCreator_Tests.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/Core_Tests/ProfilesCreator_Tests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4827586">
-              <caret line="65" column="16" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.67672414">
+              <caret line="83" column="77" selection-start-line="83" selection-start-column="77" selection-end-line="83" selection-end-column="77" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -45,7 +45,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tjazi/profilescreator/service/core/ProfilesCreatorImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="49" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
+              <caret line="55" column="107" selection-start-line="55" selection-start-column="107" selection-end-line="55" selection-end-column="107" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -81,8 +81,8 @@
         <option value="$PROJECT_DIR$/src/test/java/Controller_Tests/ProfilesCreatorController_Tests.java" />
         <option value="$PROJECT_DIR$/src/test/java/Controller_Tests/IndexController_Tests.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/tjazi/profilescreator/service/core/ProfilesCreatorImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/Core_Tests/ProfilesCreator_Tests.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/tjazi/profilescreator/service/core/ProfilesCreatorImpl.java" />
       </list>
     </option>
   </component>
@@ -302,59 +302,7 @@
       <recent name="com.tjazi.profilescreator.service.core" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ProfilesCreator_Tests.createProfile_CreateProfileInProfilesThenInSecurities_AllSuccess">
-    <configuration default="false" name="IndexController_Tests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="Controller_Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="core" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="Controller_Tests" />
-      <option name="MAIN_CLASS_NAME" value="Controller_Tests.IndexController_Tests" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="IndexController_Tests.displayStatusPage_Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="Controller_Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="core" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="Controller_Tests" />
-      <option name="MAIN_CLASS_NAME" value="Controller_Tests.IndexController_Tests" />
-      <option name="METHOD_NAME" value="displayStatusPage_Test" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.ProfilesCreator_Tests.createProfile_CreateProfileInProfilesThenInSecurities_UserNameEmail">
     <configuration default="false" name="ProfilesCreatorController_Tests.createProfile_NullInput" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -420,6 +368,58 @@
       <option name="PACKAGE_NAME" value="Core_Tests" />
       <option name="MAIN_CLASS_NAME" value="Core_Tests.ProfilesCreator_Tests" />
       <option name="METHOD_NAME" value="createProfile_CreateProfileInProfilesThenInSecurities_AllSuccess" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="ProfilesCreator_Tests.createProfile_CreateProfileInProfilesThenInSecurities_DuplicateEmail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="Core_Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="core" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="Core_Tests" />
+      <option name="MAIN_CLASS_NAME" value="Core_Tests.ProfilesCreator_Tests" />
+      <option name="METHOD_NAME" value="createProfile_CreateProfileInProfilesThenInSecurities_DuplicateEmail" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="ProfilesCreator_Tests.createProfile_CreateProfileInProfilesThenInSecurities_UserNameEmail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="Core_Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="core" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="Core_Tests" />
+      <option name="MAIN_CLASS_NAME" value="Core_Tests.ProfilesCreator_Tests" />
+      <option name="METHOD_NAME" value="createProfile_CreateProfileInProfilesThenInSecurities_UserNameEmail" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -976,19 +976,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.IndexController_Tests" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.IndexController_Tests.displayStatusPage_Test" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.ProfilesCreatorController_Tests.createProfile_NullInput" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.ProfilesCreator_Tests.createProfile_NullArgument_Test" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.ProfilesCreator_Tests.createProfile_CreateProfileInProfilesThenInSecurities_AllSuccess" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.ProfilesCreatorController_Tests.createProfile_NullInput" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.ProfilesCreator_Tests.createProfile_NullArgument_Test" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.ProfilesCreator_Tests.createProfile_CreateProfileInProfilesThenInSecurities_AllSuccess" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.ProfilesCreator_Tests.createProfile_CreateProfileInProfilesThenInSecurities_DuplicateEmail" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.ProfilesCreator_Tests.createProfile_CreateProfileInProfilesThenInSecurities_UserNameEmail" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.ProfilesCreator_Tests.createProfile_CreateProfileInProfilesThenInSecurities_AllSuccess" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.ProfilesCreator_Tests.createProfile_NullArgument_Test" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.ProfilesCreatorController_Tests.createProfile_NullInput" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.IndexController_Tests.displayStatusPage_Test" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.IndexController_Tests" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.ProfilesCreator_Tests.createProfile_CreateProfileInProfilesThenInSecurities_UserNameEmail" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ProfilesCreator_Tests.createProfile_CreateProfileInProfilesThenInSecurities_DuplicateEmail" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.ProfilesCreator_Tests.createProfile_CreateProfileInProfilesThenInSecurities_AllSuccess" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.ProfilesCreator_Tests.createProfile_NullArgument_Test" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.ProfilesCreatorController_Tests.createProfile_NullInput" />
       </list>
     </recent_temporary>
   </component>
@@ -1009,12 +1009,12 @@
       <updated>1445490781668</updated>
       <workItem from="1445490783697" duration="1989000" />
       <workItem from="1445540866360" duration="7103000" />
-      <workItem from="1445754640899" duration="6224000" />
+      <workItem from="1445754640899" duration="6860000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15316000" />
+    <option name="totallyTimeSpent" value="15952000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="825" extended-state="6" />
@@ -1029,7 +1029,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3287858" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3287858" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287858" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1199,7 +1199,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/tjazi/profilescreator/service/core/ProfilesCreatorImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="49" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
+          <caret line="55" column="107" selection-start-line="55" selection-start-column="107" selection-end-line="55" selection-end-column="107" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1208,8 +1208,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/Core_Tests/ProfilesCreator_Tests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4827586">
-          <caret line="65" column="16" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.67672414">
+          <caret line="83" column="77" selection-start-line="83" selection-start-column="77" selection-end-line="83" selection-end-column="77" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

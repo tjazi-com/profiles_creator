@@ -66,15 +66,34 @@ public class ProfilesCreator_Tests {
                 CreateBasicProfileResponseStatus.OK);
     }
 
+    @Test
+    public void createProfile_CreateProfileInProfilesThenInSecurities_DuplicateEmail() {
+
+        this.parametrizedCreateProfileTest(
+                RegisterNewProfileResponseStatus.USER_EMAIL_ALREADY_REGISTERED_WITH_DIFFERENT_USER,
+                null,
+                CreateBasicProfileResponseStatus.USER_EMAIL_ALREADY_REGISTERED);
+    }
+
+    @Test
+    public void createProfile_CreateProfileInProfilesThenInSecurities_UserNameEmail() {
+
+        this.parametrizedCreateProfileTest(
+                RegisterNewProfileResponseStatus.USER_NAME_ALREADY_REGISTERED,
+                null,
+                CreateBasicProfileResponseStatus.USER_NAME_ALREADY_REGISTERED);
+    }
+
     private void parametrizedCreateProfileTest(
             RegisterNewProfileResponseStatus profileRegistrationResponseStatus,
-            RegisterNewUserCredentialsResponseStatus credentialsRegistraitionResponseStatus,
+            RegisterNewUserCredentialsResponseStatus credentialsRegistrationResponseStatus,
             CreateBasicProfileResponseStatus expectedCreateBasicProfileResponseStatus) {
 
         final String userName = "sample user name";
         final String md5PasswordHash = "sampleMD5PasswordHash";
         final String userEmail = "sample user email";
-        final UUID newProfileUuid = UUID.randomUUID();
+        final UUID newProfileUuid =
+                profileRegistrationResponseStatus == RegisterNewProfileResponseStatus.OK ? UUID.randomUUID() : null;
 
         // we skip name and surname in simple profile creation
         // those can be added later, when updating profile
@@ -90,7 +109,7 @@ public class ProfilesCreator_Tests {
                 .thenReturn(registerNewProfileResponseMessage);
 
         RegisterNewUserCredentialsResponseMessage registerNewUserCredentialsResponseMessage = new RegisterNewUserCredentialsResponseMessage();
-        registerNewUserCredentialsResponseMessage.setRegistrationStatus(credentialsRegistraitionResponseStatus);
+        registerNewUserCredentialsResponseMessage.setRegistrationStatus(credentialsRegistrationResponseStatus);
 
         when(securityClient.registerNewUserCredentials(newProfileUuid, md5PasswordHash))
                 .thenReturn(registerNewUserCredentialsResponseMessage);

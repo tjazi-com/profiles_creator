@@ -2,6 +2,7 @@ package com.tjazi.profilescreator.service.core;
 
 import com.tjazi.profiles.client.ProfilesClient;
 import com.tjazi.profiles.messages.RegisterNewProfileResponseMessage;
+import com.tjazi.profiles.messages.RegisterNewProfileResponseStatus;
 import com.tjazi.profilescreator.messages.CreateBasicProfileRequestMessage;
 import com.tjazi.profilescreator.messages.CreateBasicProfileResponseMessage;
 import com.tjazi.profilescreator.messages.CreateBasicProfileResponseStatus;
@@ -44,11 +45,23 @@ public class ProfilesCreatorImpl implements ProfilesCreator {
         RegisterNewProfileResponseMessage registerNewProfileResponseMessage =
                 profilesClient.RegisterNewProfile(requestMessage.getUserName(), requestMessage.getUserEmail(), null, null);
 
+        CreateBasicProfileResponseMessage responseMessage = new CreateBasicProfileResponseMessage();
+
+        if (registerNewProfileResponseMessage.getRegisterNewProfileResponseStatus() == RegisterNewProfileResponseStatus.USER_EMAIL_ALREADY_REGISTERED_WITH_DIFFERENT_USER) {
+            responseMessage.setResponseStatus(CreateBasicProfileResponseStatus.USER_EMAIL_ALREADY_REGISTERED);
+            return responseMessage;
+        }
+
+        if (registerNewProfileResponseMessage.getRegisterNewProfileResponseStatus() == RegisterNewProfileResponseStatus.USER_NAME_ALREADY_REGISTERED) {
+            responseMessage.setResponseStatus(CreateBasicProfileResponseStatus.USER_NAME_ALREADY_REGISTERED);
+            return responseMessage;
+        }
+
         final UUID newUserProfileUuid = registerNewProfileResponseMessage.getNewProfileUuid();
 
         securityClient.registerNewUserCredentials(newUserProfileUuid, requestMessage.getPasswordHash());
 
-        CreateBasicProfileResponseMessage responseMessage = new CreateBasicProfileResponseMessage();
+
         responseMessage.setResponseStatus(CreateBasicProfileResponseStatus.OK);
         responseMessage.setCreatedProfileUuid(newUserProfileUuid);
 

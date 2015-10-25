@@ -60,6 +60,17 @@ public class ProfilesCreator_Tests {
     @Test
     public void createProfile_CreateProfileInProfilesThenInSecurities_AllSuccess() {
 
+        this.parametrizedCreateProfileTest(
+                RegisterNewProfileResponseStatus.OK,
+                RegisterNewUserCredentialsResponseStatus.OK,
+                CreateBasicProfileResponseStatus.OK);
+    }
+
+    private void parametrizedCreateProfileTest(
+            RegisterNewProfileResponseStatus profileRegistrationResponseStatus,
+            RegisterNewUserCredentialsResponseStatus credentialsRegistraitionResponseStatus,
+            CreateBasicProfileResponseStatus expectedCreateBasicProfileResponseStatus) {
+
         final String userName = "sample user name";
         final String md5PasswordHash = "sampleMD5PasswordHash";
         final String userEmail = "sample user email";
@@ -72,14 +83,14 @@ public class ProfilesCreator_Tests {
         String surname = null;
 
         RegisterNewProfileResponseMessage registerNewProfileResponseMessage = new RegisterNewProfileResponseMessage();
-        registerNewProfileResponseMessage.setRegisterNewProfileResponseStatus(RegisterNewProfileResponseStatus.OK);
+        registerNewProfileResponseMessage.setRegisterNewProfileResponseStatus(profileRegistrationResponseStatus);
         registerNewProfileResponseMessage.setNewProfileUuid(newProfileUuid);
 
         when(profilesClient.RegisterNewProfile(userName, userEmail, name, surname))
-                            .thenReturn(registerNewProfileResponseMessage);
+                .thenReturn(registerNewProfileResponseMessage);
 
         RegisterNewUserCredentialsResponseMessage registerNewUserCredentialsResponseMessage = new RegisterNewUserCredentialsResponseMessage();
-        registerNewUserCredentialsResponseMessage.setRegistrationStatus(RegisterNewUserCredentialsResponseStatus.OK);
+        registerNewUserCredentialsResponseMessage.setRegistrationStatus(credentialsRegistraitionResponseStatus);
 
         when(securityClient.registerNewUserCredentials(newProfileUuid, md5PasswordHash))
                 .thenReturn(registerNewUserCredentialsResponseMessage);
@@ -91,10 +102,14 @@ public class ProfilesCreator_Tests {
 
         CreateBasicProfileResponseMessage profileCreationResponse = profilesCreator.createProfile(requestMessage);
 
-        assertEquals(CreateBasicProfileResponseStatus.OK, profileCreationResponse.getResponseStatus());
+        assertEquals(expectedCreateBasicProfileResponseStatus, profileCreationResponse.getResponseStatus());
         assertEquals(newProfileUuid, profileCreationResponse.getCreatedProfileUuid());
 
         verify(profilesClient, times(1)).RegisterNewProfile(userName, userEmail, name, surname);
-        verify(securityClient, times(1)).registerNewUserCredentials(newProfileUuid, md5PasswordHash);
+
+        // security client should be called always ONLY if creating profile has succeed
+        if (profileRegistrationResponseStatus == RegisterNewProfileResponseStatus.OK) {
+            verify(securityClient, times(1)).registerNewUserCredentials(newProfileUuid, md5PasswordHash);
+        }
     }
 }

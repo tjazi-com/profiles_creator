@@ -29,11 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ProfilesCreator_Tests.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ProfilesCreator_Tests.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/Core_Tests/ProfilesCreator_Tests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="91" column="61" selection-start-line="91" selection-start-column="61" selection-end-line="91" selection-end-column="61" />
+            <state vertical-scroll-proportion="0.4827586">
+              <caret line="65" column="16" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -41,10 +41,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProfilesCreatorImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ProfilesCreatorImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/tjazi/profilescreator/service/core/ProfilesCreatorImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.61206895">
+            <state vertical-scroll-proportion="0.0">
               <caret line="42" column="49" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -81,8 +81,8 @@
         <option value="$PROJECT_DIR$/src/test/java/Controller_Tests/ProfilesCreatorController_Tests.java" />
         <option value="$PROJECT_DIR$/src/test/java/Controller_Tests/IndexController_Tests.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/test/java/Core_Tests/ProfilesCreator_Tests.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/tjazi/profilescreator/service/core/ProfilesCreatorImpl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/Core_Tests/ProfilesCreator_Tests.java" />
       </list>
     </option>
   </component>
@@ -1009,12 +1009,12 @@
       <updated>1445490781668</updated>
       <workItem from="1445490783697" duration="1989000" />
       <workItem from="1445540866360" duration="7103000" />
-      <workItem from="1445754640899" duration="5472000" />
+      <workItem from="1445754640899" duration="6224000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14564000" />
+    <option name="totallyTimeSpent" value="15316000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="825" extended-state="6" />
@@ -1196,20 +1196,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/Core_Tests/ProfilesCreator_Tests.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/tjazi/profilescreator/service/core/ProfilesCreatorImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="91" column="61" selection-start-line="91" selection-start-column="61" selection-end-line="91" selection-end-column="61" />
+          <caret line="42" column="49" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/tjazi/profilescreator/service/core/ProfilesCreatorImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/Core_Tests/ProfilesCreator_Tests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61206895">
-          <caret line="42" column="49" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.4827586">
+          <caret line="65" column="16" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

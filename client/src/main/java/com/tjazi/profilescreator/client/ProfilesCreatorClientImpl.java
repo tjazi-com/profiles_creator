@@ -27,6 +27,13 @@ public class ProfilesCreatorClientImpl implements ProfilesCreatorClient {
         this.restClient = restClient;
     }
 
+    /**
+     * Create basic profile
+     * @param userName User name
+     * @param userEmail User email
+     * @param passwordHash Password MD5 hash
+     * @return Profile creation status
+     */
     public CreateBasicProfileResponseMessage createBasicProfile(String userName, String userEmail, String passwordHash) {
 
         if (userName == null || userName.isEmpty()) {

@@ -7,5 +7,12 @@ import com.tjazi.profilescreator.messages.CreateBasicProfileResponseMessage;
  */
 public interface ProfilesCreatorClient {
 
+    /**
+     * Create basic profile
+     * @param userName User name
+     * @param userEmail User email
+     * @param passwordHash Password MD5 hash
+     * @return Profile creation status
+     */
     CreateBasicProfileResponseMessage createBasicProfile(String userName, String userEmail, String passwordHash);
 }

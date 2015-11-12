@@ -43,7 +43,7 @@ public class ProfilesCreatorImpl implements ProfilesCreator {
         // register profile, but skip name and surname
         // those are not needed for basic profile
         RegisterNewProfileResponseMessage registerNewProfileResponseMessage =
-                profilesClient.RegisterNewProfile(requestMessage.getUserName(), requestMessage.getUserEmail(), null, null);
+                profilesClient.registerNewProfile(requestMessage.getUserName(), requestMessage.getUserEmail(), null, null);
 
         CreateBasicProfileResponseMessage responseMessage = new CreateBasicProfileResponseMessage();
 

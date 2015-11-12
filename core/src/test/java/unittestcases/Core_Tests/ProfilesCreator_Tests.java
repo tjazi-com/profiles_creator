@@ -1,7 +1,6 @@
-package Core_Tests;
+package unittestcases.Core_Tests;
 
 import com.tjazi.profiles.client.ProfilesClient;
-import com.tjazi.profiles.client.ProfilesClientFactory;
 import com.tjazi.profiles.messages.RegisterNewProfileResponseMessage;
 import com.tjazi.profiles.messages.RegisterNewProfileResponseStatus;
 import com.tjazi.profilescreator.messages.CreateBasicProfileRequestMessage;
@@ -10,10 +9,8 @@ import com.tjazi.profilescreator.messages.CreateBasicProfileResponseStatus;
 import com.tjazi.profilescreator.service.core.ProfilesCreator;
 import com.tjazi.profilescreator.service.core.ProfilesCreatorImpl;
 import com.tjazi.security.client.SecurityClient;
-import com.tjazi.security.client.SecurityClientFactory;
 import com.tjazi.security.messages.RegisterNewUserCredentialsResponseMessage;
-import com.tjazi.security.messages.enums.RegisterNewUserCredentialsResponseStatus;
-import org.junit.Before;
+import com.tjazi.security.messages.RegisterNewUserCredentialsResponseStatus;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -22,11 +19,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.net.URI;
 import java.util.UUID;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
 
 /**
  * Created by Krzysztof Wasiak on 22/10/2015.
@@ -105,7 +101,7 @@ public class ProfilesCreator_Tests {
         registerNewProfileResponseMessage.setRegisterNewProfileResponseStatus(profileRegistrationResponseStatus);
         registerNewProfileResponseMessage.setNewProfileUuid(newProfileUuid);
 
-        when(profilesClient.RegisterNewProfile(userName, userEmail, name, surname))
+        when(profilesClient.registerNewProfile(userName, userEmail, name, surname))
                 .thenReturn(registerNewProfileResponseMessage);
 
         RegisterNewUserCredentialsResponseMessage registerNewUserCredentialsResponseMessage = new RegisterNewUserCredentialsResponseMessage();
@@ -124,7 +120,7 @@ public class ProfilesCreator_Tests {
         assertEquals(expectedCreateBasicProfileResponseStatus, profileCreationResponse.getResponseStatus());
         assertEquals(newProfileUuid, profileCreationResponse.getCreatedProfileUuid());
 
-        verify(profilesClient, times(1)).RegisterNewProfile(userName, userEmail, name, surname);
+        verify(profilesClient, times(1)).registerNewProfile(userName, userEmail, name, surname);
 
         // security client should be called always ONLY if creating profile has succeed
         if (profileRegistrationResponseStatus == RegisterNewProfileResponseStatus.OK) {

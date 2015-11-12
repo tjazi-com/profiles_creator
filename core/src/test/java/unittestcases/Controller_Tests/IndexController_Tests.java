@@ -1,4 +1,4 @@
-package Controller_Tests;
+package unittestcases.Controller_Tests;
 
 import com.tjazi.profilescreator.service.controller.IndexController;
 import org.junit.Test;

@@ -1,11 +1,9 @@
-package Controller_Tests;
+package unittestcases.Controller_Tests;
 
 import com.tjazi.profilescreator.service.controller.ProfilesCreatorController;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by kr329462 on 22/10/2015.

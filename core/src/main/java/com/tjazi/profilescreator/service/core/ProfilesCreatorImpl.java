@@ -7,6 +7,8 @@ import com.tjazi.profilescreator.messages.CreateBasicProfileRequestMessage;
 import com.tjazi.profilescreator.messages.CreateBasicProfileResponseMessage;
 import com.tjazi.profilescreator.messages.CreateBasicProfileResponseStatus;
 import com.tjazi.security.client.SecurityClient;
+import com.tjazi.security.messages.RegisterNewUserCredentialsResponseMessage;
+import com.tjazi.security.messages.RegisterNewUserCredentialsResponseStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,20 +49,32 @@ public class ProfilesCreatorImpl implements ProfilesCreator {
 
         CreateBasicProfileResponseMessage responseMessage = new CreateBasicProfileResponseMessage();
 
-        if (registerNewProfileResponseMessage.getRegisterNewProfileResponseStatus() == RegisterNewProfileResponseStatus.USER_EMAIL_ALREADY_REGISTERED_WITH_DIFFERENT_USER) {
+        RegisterNewProfileResponseStatus registrationResponseStatus = registerNewProfileResponseMessage.getRegisterNewProfileResponseStatus();
+        if (registrationResponseStatus == RegisterNewProfileResponseStatus.USER_EMAIL_ALREADY_REGISTERED_WITH_DIFFERENT_USER) {
             responseMessage.setResponseStatus(CreateBasicProfileResponseStatus.USER_EMAIL_ALREADY_REGISTERED);
             return responseMessage;
         }
 
-        if (registerNewProfileResponseMessage.getRegisterNewProfileResponseStatus() == RegisterNewProfileResponseStatus.USER_NAME_ALREADY_REGISTERED) {
+        if (registrationResponseStatus == RegisterNewProfileResponseStatus.USER_NAME_ALREADY_REGISTERED) {
             responseMessage.setResponseStatus(CreateBasicProfileResponseStatus.USER_NAME_ALREADY_REGISTERED);
+            return responseMessage;
+        }
+
+        if (registrationResponseStatus == RegisterNewProfileResponseStatus.GENERAL_REGISTRATION_ERROR) {
+            responseMessage.setResponseStatus(CreateBasicProfileResponseStatus.GENERAL_ERROR);
             return responseMessage;
         }
 
         final UUID newUserProfileUuid = registerNewProfileResponseMessage.getNewProfileUuid();
 
-        securityClient.registerNewUserCredentials(newUserProfileUuid, requestMessage.getPasswordHash());
+        RegisterNewUserCredentialsResponseMessage securityRegistrationResponseMessage =
+                securityClient.registerNewUserCredentials(newUserProfileUuid, requestMessage.getPasswordHash());
 
+        if (securityRegistrationResponseMessage.getRegistrationStatus() == RegisterNewUserCredentialsResponseStatus.GENERAL_ERROR) {
+            responseMessage.setResponseStatus(CreateBasicProfileResponseStatus.GENERAL_ERROR);
+            responseMessage.setCreatedProfileUuid(newUserProfileUuid);
+            return responseMessage;
+        }
 
         responseMessage.setResponseStatus(CreateBasicProfileResponseStatus.OK);
         responseMessage.setCreatedProfileUuid(newUserProfileUuid);

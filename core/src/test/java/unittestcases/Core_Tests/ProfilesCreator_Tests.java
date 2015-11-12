@@ -63,12 +63,30 @@ public class ProfilesCreator_Tests {
     }
 
     @Test
+    public void createProfile_GeneralErrorOnSecurityRegistrationGeneralError_AllSuccess() {
+
+        this.parametrizedCreateProfileTest(
+                RegisterNewProfileResponseStatus.OK,
+                RegisterNewUserCredentialsResponseStatus.GENERAL_ERROR,
+                CreateBasicProfileResponseStatus.GENERAL_ERROR);
+    }
+
+    @Test
     public void createProfile_CreateProfileInProfilesThenInSecurities_DuplicateEmail() {
 
         this.parametrizedCreateProfileTest(
                 RegisterNewProfileResponseStatus.USER_EMAIL_ALREADY_REGISTERED_WITH_DIFFERENT_USER,
                 null,
                 CreateBasicProfileResponseStatus.USER_EMAIL_ALREADY_REGISTERED);
+    }
+
+    @Test
+    public void createProfile_GeneralErrorOnGeneralRegistrationError_DuplicateEmail() {
+
+        this.parametrizedCreateProfileTest(
+                RegisterNewProfileResponseStatus.GENERAL_REGISTRATION_ERROR,
+                null,
+                CreateBasicProfileResponseStatus.GENERAL_ERROR);
     }
 
     @Test

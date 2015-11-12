@@ -2,8 +2,11 @@ package com.tjazi.profilescreator.service.controller;
 
 import com.tjazi.profilescreator.messages.CreateBasicProfileRequestMessage;
 import com.tjazi.profilescreator.messages.CreateBasicProfileResponseMessage;
+import com.tjazi.profilescreator.service.core.ProfilesCreator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,9 +21,12 @@ public class ProfilesCreatorController {
 
     private Logger log = LoggerFactory.getLogger(ProfilesCreatorController.class);
 
+    @Autowired
+    private ProfilesCreator profilesCreator;
+
     @RequestMapping(value = "/createprofile", method = RequestMethod.POST)
     public CreateBasicProfileResponseMessage createBasicProfile(
-            CreateBasicProfileRequestMessage createBasicProfileRequestMessage) {
+            @RequestBody CreateBasicProfileRequestMessage createBasicProfileRequestMessage) {
 
         if (createBasicProfileRequestMessage == null) {
             log.error("createBasicProfileRequestMessage is null.");
@@ -29,6 +35,6 @@ public class ProfilesCreatorController {
 
         log.info("Requesting profile creation for user name: {} and email: {}.");
 
-        return null;
+        return profilesCreator.createProfile(createBasicProfileRequestMessage);
     }
 }

@@ -47,9 +47,44 @@ public class ProfilesCreatorImpl implements ProfilesCreator {
         RegisterNewProfileResponseMessage registerNewProfileResponseMessage =
                 profilesClient.registerNewProfile(requestMessage.getUserName(), requestMessage.getUserEmail(), null, null);
 
+        CreateBasicProfileResponseMessage profilesResponseMessage =
+                this.findProfileRegistrationResponseErrors(registerNewProfileResponseMessage);
+
+        if (profilesResponseMessage != null) {
+            return profilesResponseMessage;
+        }
+
+        final UUID newUserProfileUuid = registerNewProfileResponseMessage.getNewProfileUuid();
+
+        RegisterNewUserCredentialsResponseMessage securityRegistrationResponseMessage =
+                securityClient.registerNewUserCredentials(newUserProfileUuid, requestMessage.getPasswordHash());
+
+        CreateBasicProfileResponseMessage securityResponseMessage =
+                this.findSecurityProfileRegistrationErrors(securityRegistrationResponseMessage, newUserProfileUuid);
+
+        if (securityResponseMessage != null) {
+            return securityResponseMessage;
+        }
+
+        CreateBasicProfileResponseMessage responseMessage = new CreateBasicProfileResponseMessage();
+        responseMessage.setResponseStatus(CreateBasicProfileResponseStatus.OK);
+        responseMessage.setCreatedProfileUuid(newUserProfileUuid);
+
+        return responseMessage;
+    }
+
+    private CreateBasicProfileResponseMessage findProfileRegistrationResponseErrors(
+            RegisterNewProfileResponseMessage registerNewProfileResponseMessage) {
+
         CreateBasicProfileResponseMessage responseMessage = new CreateBasicProfileResponseMessage();
 
+        if (registerNewProfileResponseMessage == null) {
+            responseMessage.setResponseStatus(CreateBasicProfileResponseStatus.GENERAL_ERROR);
+            return responseMessage;
+        }
+
         RegisterNewProfileResponseStatus registrationResponseStatus = registerNewProfileResponseMessage.getRegisterNewProfileResponseStatus();
+
         if (registrationResponseStatus == RegisterNewProfileResponseStatus.USER_EMAIL_ALREADY_REGISTERED_WITH_DIFFERENT_USER) {
             responseMessage.setResponseStatus(CreateBasicProfileResponseStatus.USER_EMAIL_ALREADY_REGISTERED);
             return responseMessage;
@@ -65,20 +100,30 @@ public class ProfilesCreatorImpl implements ProfilesCreator {
             return responseMessage;
         }
 
-        final UUID newUserProfileUuid = registerNewProfileResponseMessage.getNewProfileUuid();
-
-        RegisterNewUserCredentialsResponseMessage securityRegistrationResponseMessage =
-                securityClient.registerNewUserCredentials(newUserProfileUuid, requestMessage.getPasswordHash());
-
-        if (securityRegistrationResponseMessage.getRegistrationStatus() == RegisterNewUserCredentialsResponseStatus.GENERAL_ERROR) {
-            responseMessage.setResponseStatus(CreateBasicProfileResponseStatus.GENERAL_ERROR);
-            responseMessage.setCreatedProfileUuid(newUserProfileUuid);
-            return responseMessage;
-        }
-
-        responseMessage.setResponseStatus(CreateBasicProfileResponseStatus.OK);
-        responseMessage.setCreatedProfileUuid(newUserProfileUuid);
-
-        return responseMessage;
+        // all good, no error to return...
+        return null;
     }
+
+     private CreateBasicProfileResponseMessage findSecurityProfileRegistrationErrors(
+             RegisterNewUserCredentialsResponseMessage securityRegistrationResponseMessage, UUID newUserProfileUuid) {
+
+         CreateBasicProfileResponseMessage responseMessage = new CreateBasicProfileResponseMessage();
+
+         // at this stage we have profile UUID, because it was created earlier so we can do some decoration
+         // of all outgoing messages
+         responseMessage.setCreatedProfileUuid(newUserProfileUuid);
+
+         if (securityRegistrationResponseMessage == null) {
+             responseMessage.setResponseStatus(CreateBasicProfileResponseStatus.GENERAL_ERROR);
+             return responseMessage;
+         }
+
+         if (securityRegistrationResponseMessage.getRegistrationStatus() == RegisterNewUserCredentialsResponseStatus.GENERAL_ERROR) {
+             responseMessage.setResponseStatus(CreateBasicProfileResponseStatus.GENERAL_ERROR);
+             return responseMessage;
+         }
+
+         // all good, no error to return...
+         return null;
+     }
 }

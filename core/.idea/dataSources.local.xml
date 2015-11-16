@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Profiles Store" uuid="a0e54e90-b4e1-4e5f-bfa7-b9134571b9fb">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>ProfilesStore.*</schema-pattern>
+      <default-schemas>ProfilesStore.*</default-schemas>
+    </data-source>
+    <data-source name="Security Store" uuid="c5f0b282-b0f9-48e1-890f-68e139b32666">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>SecurityStore.*</schema-pattern>
+      <default-schemas>SecurityStore.*</default-schemas>
+    </data-source>
+  </component>
+</project>

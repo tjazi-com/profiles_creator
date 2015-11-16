@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="Profiles Store" uuid="a0e54e90-b4e1-4e5f-bfa7-b9134571b9fb">
+    <database-info product="MySQL" version="5.6.26" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.3">
+      <schema id="1" name="ProfilesStore"/>
+    </database-model>
+  </data-source>
+  <data-source name="Security Store" uuid="c5f0b282-b0f9-48e1-890f-68e139b32666">
+    <database-info product="MySQL" version="5.6.26" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.3">
+      <schema id="1" name="SecurityStore"/>
+      <table id="2" parent="1" name="UserProfileSecurityData"/>
+      <column id="3" parent="2" name="ID">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="4" parent="2" name="PasswordHash">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="5" parent="2" name="ProfileUUID">
+        <mandatory>1</mandatory>
+        <data-type>varchar(255)</data-type>
+      </column>
+      <index id="6" parent="2" name="UK_sq4cytp9yomhsa7235i0dlwes">
+        <columns>ProfileUUID</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="7" parent="2" name="PRIMARY">
+        <columns>ID</columns>
+        <primary>1</primary>
+      </key>
+      <key id="8" parent="2" name="UK_sq4cytp9yomhsa7235i0dlwes">
+        <columns>ProfileUUID</columns>
+        <underlying-index>UK_sq4cytp9yomhsa7235i0dlwes</underlying-index>
+      </key>
+    </database-model>
+  </data-source>
+</component>

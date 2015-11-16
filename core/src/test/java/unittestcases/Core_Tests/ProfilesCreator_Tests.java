@@ -98,6 +98,24 @@ public class ProfilesCreator_Tests {
                 CreateBasicProfileResponseStatus.USER_NAME_ALREADY_REGISTERED);
     }
 
+    @Test
+    public void createProfile_CreateProfileGeneralErrorWhenNullFromBasicProfileRegistration_Test() {
+
+        this.parametrizedCreateProfileTest(
+                null,
+                null,
+                CreateBasicProfileResponseStatus.GENERAL_ERROR);
+    }
+
+    @Test
+    public void createProfile_CreateProfileGeneralErrorWhenNullFromSecurityProfileRegistration_Test() {
+
+        this.parametrizedCreateProfileTest(
+                RegisterNewProfileResponseStatus.OK,
+                null,
+                CreateBasicProfileResponseStatus.GENERAL_ERROR);
+    }
+
     private void parametrizedCreateProfileTest(
             RegisterNewProfileResponseStatus profileRegistrationResponseStatus,
             RegisterNewUserCredentialsResponseStatus credentialsRegistrationResponseStatus,
@@ -115,15 +133,23 @@ public class ProfilesCreator_Tests {
         String name = null;
         String surname = null;
 
-        RegisterNewProfileResponseMessage registerNewProfileResponseMessage = new RegisterNewProfileResponseMessage();
-        registerNewProfileResponseMessage.setRegisterNewProfileResponseStatus(profileRegistrationResponseStatus);
-        registerNewProfileResponseMessage.setNewProfileUuid(newProfileUuid);
+        RegisterNewProfileResponseMessage registerNewProfileResponseMessage = null;
+
+        if (profileRegistrationResponseStatus != null) {
+            registerNewProfileResponseMessage = new RegisterNewProfileResponseMessage();
+            registerNewProfileResponseMessage.setRegisterNewProfileResponseStatus(profileRegistrationResponseStatus);
+            registerNewProfileResponseMessage.setNewProfileUuid(newProfileUuid);
+        }
 
         when(profilesClient.registerNewProfile(userName, userEmail, name, surname))
                 .thenReturn(registerNewProfileResponseMessage);
 
-        RegisterNewUserCredentialsResponseMessage registerNewUserCredentialsResponseMessage = new RegisterNewUserCredentialsResponseMessage();
-        registerNewUserCredentialsResponseMessage.setRegistrationStatus(credentialsRegistrationResponseStatus);
+        RegisterNewUserCredentialsResponseMessage registerNewUserCredentialsResponseMessage = null;
+
+        if (credentialsRegistrationResponseStatus != null) {
+            registerNewUserCredentialsResponseMessage = new RegisterNewUserCredentialsResponseMessage();
+            registerNewUserCredentialsResponseMessage.setRegistrationStatus(credentialsRegistrationResponseStatus);
+        }
 
         when(securityClient.registerNewUserCredentials(newProfileUuid, md5PasswordHash))
                 .thenReturn(registerNewUserCredentialsResponseMessage);
@@ -133,8 +159,10 @@ public class ProfilesCreator_Tests {
         requestMessage.setUserName(userName);
         requestMessage.setPasswordHash(md5PasswordHash);
 
+        // main method call
         CreateBasicProfileResponseMessage profileCreationResponse = profilesCreator.createProfile(requestMessage);
 
+        // assertion and verification
         assertEquals(expectedCreateBasicProfileResponseStatus, profileCreationResponse.getResponseStatus());
         assertEquals(newProfileUuid, profileCreationResponse.getCreatedProfileUuid());
 

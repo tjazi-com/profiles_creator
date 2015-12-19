@@ -1,6 +1,6 @@
 package unittestcases.Controller_Tests;
 
-import com.tjazi.profilescreator.service.controller.ProfilesCreatorController;
+import com.tjazi.profilescreator.service.endpoint.ProfilesCreatorEndpoint;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -16,7 +16,7 @@ public class ProfilesCreatorController_Tests {
     @Test
     public void createProfile_NullInput() {
 
-        ProfilesCreatorController controller = new ProfilesCreatorController();
+        ProfilesCreatorEndpoint controller = new ProfilesCreatorEndpoint();
 
         thrown.expect(IllegalArgumentException.class);
         controller.createBasicProfile(null);

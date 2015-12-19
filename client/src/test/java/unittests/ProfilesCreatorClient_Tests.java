@@ -1,22 +1,20 @@
 package unittests;
 
-import com.tjazi.lib.messaging.rest.RestClient;
 import com.tjazi.profilescreator.client.ProfilesCreatorClient;
 import com.tjazi.profilescreator.client.ProfilesCreatorClientImpl;
 import com.tjazi.profilescreator.messages.CreateBasicProfileRequestMessage;
-import com.tjazi.profilescreator.messages.CreateBasicProfileResponseMessage;
-import com.tjazi.profilescreator.messages.CreateBasicProfileResponseStatus;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageChannel;
 
-import java.util.UUID;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 /**
@@ -30,40 +28,30 @@ public class ProfilesCreatorClient_Tests {
     public ExpectedException thrown = ExpectedException.none();
 
     @Mock
-    public RestClient restClientMock;
+    public MessageChannel messageChannel;
 
-    @Test
-    public void constructor_ExceptionOnNullRestClient_Test() {
-        thrown.expect(IllegalArgumentException.class);
-
-        ProfilesCreatorClient client = new ProfilesCreatorClientImpl(null);
-    }
+    @InjectMocks
+    public ProfilesCreatorClientImpl profilesCreatorClient;
 
     @Test
     public void createBasicProfile_ExceptionOnNullUserName_Test() {
         thrown.expect(IllegalArgumentException.class);
 
-        ProfilesCreatorClient client = new ProfilesCreatorClientImpl(restClientMock);
-
-        client.createBasicProfile(null, "sample@email.com",  "sample passwordhash");
+        profilesCreatorClient.createBasicProfile(null, "sample@email.com",  "sample passwordhash");
     }
 
     @Test
     public void createBasicProfile_ExceptionOnNullUserEmail_Test() {
         thrown.expect(IllegalArgumentException.class);
 
-        ProfilesCreatorClient client = new ProfilesCreatorClientImpl(restClientMock);
-
-        client.createBasicProfile("sample user name", null,  "sample passwordhash");
+        profilesCreatorClient.createBasicProfile("sample user name", null,  "sample passwordhash");
     }
 
     @Test
     public void createBasicProfile_ExceptionOnNullPasswordHash_Test() {
         thrown.expect(IllegalArgumentException.class);
 
-        ProfilesCreatorClient client = new ProfilesCreatorClientImpl(restClientMock);
-
-        client.createBasicProfile("sample user name", "sample@email.com", null);
+        profilesCreatorClient.createBasicProfile("sample user name", "sample@email.com", null);
     }
 
     @Test
@@ -72,36 +60,25 @@ public class ProfilesCreatorClient_Tests {
         final String userName = "sample user name";
         final String userEmail = "sample@user.email";
         final String passwordHash = "sample password hash";
-        final UUID newProfileUuid = UUID.randomUUID();
 
         CreateBasicProfileRequestMessage requestMessage = new CreateBasicProfileRequestMessage();
         requestMessage.setUserName(userName);
         requestMessage.setUserEmail(userEmail);
         requestMessage.setPasswordHash(passwordHash);
 
-        CreateBasicProfileResponseMessage expectedResponseMessage = new CreateBasicProfileResponseMessage();
-        expectedResponseMessage.setCreatedProfileUuid(newProfileUuid);
-        expectedResponseMessage.setResponseStatus(CreateBasicProfileResponseStatus.OK);
-
-        when(restClientMock.sendRequestGetResponse(any(CreateBasicProfileRequestMessage.class), eq(CreateBasicProfileResponseMessage.class)))
-                .thenReturn(expectedResponseMessage);
-
-        ProfilesCreatorClient client = new ProfilesCreatorClientImpl(restClientMock);
-
         // call
-        CreateBasicProfileResponseMessage actualReturnMessage = client.createBasicProfile(userName, userEmail, passwordHash);
+        profilesCreatorClient.createBasicProfile(userName, userEmail, passwordHash);
 
         // validate
-        ArgumentCaptor<CreateBasicProfileRequestMessage> captor = ArgumentCaptor.forClass(CreateBasicProfileRequestMessage.class);
+        ArgumentCaptor<Message> captor =
+                ArgumentCaptor.forClass(Message.class);
 
-        verify(restClientMock, times(1)).sendRequestGetResponse(captor.capture(), eq(CreateBasicProfileResponseMessage.class));
+        verify(messageChannel, times(1)).send(captor.capture());
 
-        assertEquals(userName, captor.getValue().getUserName());
-        assertEquals(userEmail, captor.getValue().getUserEmail());
-        assertEquals(passwordHash, captor.getValue().getPasswordHash());
-        
-        assertEquals(newProfileUuid, actualReturnMessage.getCreatedProfileUuid());
-        assertEquals(CreateBasicProfileResponseStatus.OK, actualReturnMessage.getResponseStatus());
+        CreateBasicProfileRequestMessage capturedMessage = (CreateBasicProfileRequestMessage) captor.getValue().getPayload();
 
+        assertEquals(userName, capturedMessage.getUserName());
+        assertEquals(userEmail, capturedMessage.getUserEmail());
+        assertEquals(passwordHash, capturedMessage.getPasswordHash());
     }
 }

@@ -7,6 +7,8 @@ import com.tjazi.profiles.client.ProfilesClientImpl;
 import com.tjazi.security.client.SecurityClient;
 import com.tjazi.security.client.SecurityClientImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -16,6 +18,7 @@ import org.springframework.core.env.Environment;
  * Created by Krzysztof Wasiak on 12/11/2015.
  */
 
+@EnableBinding(Sink.class)
 @Configuration
 public class ExternalServiceWiringConfig {
 
@@ -27,7 +30,7 @@ public class ExternalServiceWiringConfig {
     public ProfilesClient getProfilesClientFactory() {
         String profilesServiceUrl = environment.getProperty("com.tjazi.profiles.service.rooturl");
 
-        return new ProfilesClientImpl(this.getRestClient(profilesServiceUrl));
+        return new ProfilesClientImpl();
     }
 
     @Bean(name = "securityClient")
@@ -35,10 +38,6 @@ public class ExternalServiceWiringConfig {
     public SecurityClient getSecurityClientFactory() {
         String securityServiceUrl = environment.getProperty("com.tjazi.security.service.rooturl");
 
-        return new SecurityClientImpl(this.getRestClient(securityServiceUrl));
-    }
-
-    private RestClient getRestClient(String targetUrl) {
-        return new RestClientImpl(targetUrl);
+        return new SecurityClientImpl();
     }
 }

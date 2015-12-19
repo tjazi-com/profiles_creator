@@ -8,5 +8,5 @@ import com.tjazi.profilescreator.messages.CreateBasicProfileResponseMessage;
  */
 public interface ProfilesCreator {
 
-    CreateBasicProfileResponseMessage createProfile(CreateBasicProfileRequestMessage requestMessage);
+    void createProfile(CreateBasicProfileRequestMessage requestMessage);
 }

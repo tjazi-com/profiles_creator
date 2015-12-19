@@ -1,40 +1,42 @@
 package com.tjazi.profilescreator.client;
 
-import com.tjazi.lib.messaging.rest.RestClient;
 import com.tjazi.profilescreator.messages.CreateBasicProfileRequestMessage;
-import com.tjazi.profilescreator.messages.CreateBasicProfileResponseMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.annotation.Output;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.stereotype.Service;
+import org.springframework.cloud.stream.messaging.Source;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * Created by Krzysztof Wasiak on 02/11/2015.
  */
-public class ProfilesCreatorClientImpl implements ProfilesCreatorClient {
 
-    private RestClient restClient;
+@Service
+@EnableBinding(Source.class)
+public class ProfilesCreatorClientImpl implements ProfilesCreatorClient {
 
     private Logger log = LoggerFactory.getLogger(ProfilesCreatorClientImpl.class);
 
-    public ProfilesCreatorClientImpl(RestClient restClient) {
-        if (restClient == null) {
-            String errorMessage = "restClient constructor parameter is null";
+    @Autowired
+    private RestTemplate restTemplate;
 
-            log.error(errorMessage);
-            throw new IllegalArgumentException(errorMessage);
-        }
-
-        this.restClient = restClient;
-    }
+    @Autowired
+    @Output(Source.OUTPUT)
+    private MessageChannel messageChannel;
 
     /**
      * Create basic profile
      * @param userName User name
      * @param userEmail User email
      * @param passwordHash Password MD5 hash
-     * @return Profile creation status
      */
-    public CreateBasicProfileResponseMessage createBasicProfile(String userName, String userEmail, String passwordHash) {
+    public void createBasicProfile(String userName, String userEmail, String passwordHash) {
 
         if (userName == null || userName.isEmpty()) {
             throw new IllegalArgumentException("userName parameter is null or empty");
@@ -53,6 +55,6 @@ public class ProfilesCreatorClientImpl implements ProfilesCreatorClient {
         requestMessage.setUserEmail(userEmail);
         requestMessage.setPasswordHash(passwordHash);
 
-        return (CreateBasicProfileResponseMessage) restClient.sendRequestGetResponse(requestMessage, CreateBasicProfileResponseMessage.class);
+        messageChannel.send(MessageBuilder.withPayload(requestMessage).build());
     }
 }

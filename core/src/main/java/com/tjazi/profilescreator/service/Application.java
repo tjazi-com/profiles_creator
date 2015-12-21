@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * Created by Krzysztof Wasiak on 22/10/2015.
  */
 
-@ComponentScan
+@ComponentScan("com.tjazi")
 @Configuration
 @EnableAutoConfiguration
 @EnableDiscoveryClient

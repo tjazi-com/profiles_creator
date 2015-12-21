@@ -1,17 +1,14 @@
 package com.tjazi.profilescreator.service.config;
 
 import com.tjazi.profilescreator.service.endpoint.ProfilesCreatorEndpoint;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+import org.springframework.amqp.support.converter.JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,9 +21,6 @@ public class AmqpConfiguration {
 
     @Autowired
     private ProfilesCreatorEndpoint profilesCreatorEndpoint;
-
-    @Autowired
-    RabbitTemplate rabbitTemplate;
 
     @Value("${profilescreator.inputqueuename}")
     private String queueName;
@@ -50,12 +44,19 @@ public class AmqpConfiguration {
     }
 
     @Bean
-    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter) {
+    MessageConverter messageConverter() {
+        return new JsonMessageConverter();
+    }
+
+    @Bean
+    SimpleMessageListenerContainer container(
+            ConnectionFactory connectionFactory, MessageConverter messageConverter, ProfilesCreatorEndpoint profilesCreatorEndpoint) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
 
         container.setConnectionFactory(connectionFactory);
         container.setQueueNames(queueName);
-        container.setMessageListener(listenerAdapter);
+        container.setMessageListener(new MessageListenerAdapter(profilesCreatorEndpoint, messageConverter));
+        container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
 
         return container;
     }

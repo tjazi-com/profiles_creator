@@ -1,5 +1,6 @@
 package com.tjazi.profilescreator.service.endpoint;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.tjazi.profilescreator.messages.CreateBasicProfileRequestMessage;
 import com.tjazi.profilescreator.service.core.ProfilesCreator;
 import org.slf4j.Logger;
@@ -19,8 +20,8 @@ public class ProfilesCreatorEndpoint {
     @Autowired
     private ProfilesCreator profilesCreator;
 
-    public void createBasicProfile(CreateBasicProfileRequestMessage createBasicProfileRequestMessage) {
-
+    @HystrixCommand
+    public void handleMessage(CreateBasicProfileRequestMessage createBasicProfileRequestMessage) {
         if (createBasicProfileRequestMessage == null) {
             log.error("createBasicProfileRequestMessage is null.");
             throw new IllegalArgumentException();
@@ -28,6 +29,6 @@ public class ProfilesCreatorEndpoint {
 
         log.info("Requesting profile creation for user name: {} and email: {}.");
 
-        profilesCreator.createProfile(createBasicProfileRequestMessage);
+        profilesCreator.createProfile((CreateBasicProfileRequestMessage)createBasicProfileRequestMessage);
     }
 }

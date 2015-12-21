@@ -5,6 +5,7 @@ import com.tjazi.profilescreator.messages.CreateBasicProfileRequestMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.support.MessageBuilder;
@@ -21,10 +22,7 @@ public class ProfilesCreatorClientImpl implements ProfilesCreatorClient {
     private Logger log = LoggerFactory.getLogger(ProfilesCreatorClientImpl.class);
 
     @Autowired
-    private RestTemplate restTemplate;
-
-    @Autowired
-    RabbitTemplate rabbitTemplate;
+    private RabbitTemplate rabbitTemplate;
 
     @Value("${profilescreator.inputqueuename}")
     private String queueName;

@@ -4,13 +4,11 @@ import com.tjazi.profilescreator.messages.CreateBasicProfileRequestMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.annotation.Output;
-import org.springframework.messaging.MessageChannel;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -18,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
  */
 
 @Service
-@EnableBinding(Source.class)
 public class ProfilesCreatorClientImpl implements ProfilesCreatorClient {
 
     private Logger log = LoggerFactory.getLogger(ProfilesCreatorClientImpl.class);
@@ -27,8 +24,10 @@ public class ProfilesCreatorClientImpl implements ProfilesCreatorClient {
     private RestTemplate restTemplate;
 
     @Autowired
-    @Output(Source.OUTPUT)
-    private MessageChannel messageChannel;
+    RabbitTemplate rabbitTemplate;
+
+    @Value("${profilescreator.inputqueuename}")
+    private String queueName;
 
     /**
      * Create basic profile
@@ -55,6 +54,6 @@ public class ProfilesCreatorClientImpl implements ProfilesCreatorClient {
         requestMessage.setUserEmail(userEmail);
         requestMessage.setPasswordHash(passwordHash);
 
-        messageChannel.send(MessageBuilder.withPayload(requestMessage).build());
+        rabbitTemplate.convertAndSend(queueName, requestMessage);
     }
 }

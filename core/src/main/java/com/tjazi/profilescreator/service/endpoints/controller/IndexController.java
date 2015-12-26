@@ -1,4 +1,4 @@
-package com.tjazi.profilescreator.service.controller;
+package com.tjazi.profilescreator.service.endpoints.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

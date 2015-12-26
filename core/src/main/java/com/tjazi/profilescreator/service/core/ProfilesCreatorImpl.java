@@ -28,7 +28,40 @@ public class ProfilesCreatorImpl implements ProfilesCreator {
     @Override
     public void createProfile(CreateBasicProfileRequestMessage requestMessage) {
 
-        if (requestMessage == null) {
+        this.assertInput(requestMessage);
+
+        UUID newProfileUuid = this.createNewProfileUuid();
+
+        // register profile, but skip name and surname
+        // those are not needed for basic profile
+        boolean profileRegistrationResult = profilesClient.registerNewProfile(
+                newProfileUuid, requestMessage.getUserName(), requestMessage.getUserEmail(), null, null);
+
+        if (!profileRegistrationResult) {
+            log.error("Profile UUID: {}, got 'false' when calling profilesClient::registerNewProfile()", newProfileUuid);
+
+            return;
+        }
+
+        // second call - register profile with user name and password
+        if (!securityClient.registerNewUserCredentials(newProfileUuid, requestMessage.getPasswordHash())) {
+            log.error("Profile UUID: {}, got 'false' when calling securityClient::registerNewUserCredentials()");
+
+            /*
+                TODO: At this stage we have user profile, which doesn't have any security profile. This has to be fixed somehow...
+            */
+        }
+
+        log.info("Profile UUID: {}, got 'true' from profiles and security. PROFILE REGISTRATION COMPLETE.");
+    }
+
+    private UUID createNewProfileUuid() {
+        return UUID.randomUUID();
+    }
+
+    private void assertInput(CreateBasicProfileRequestMessage requestInput) {
+
+        if (requestInput == null) {
 
             String errorMessage = "requestMessage is null";
 
@@ -36,18 +69,28 @@ public class ProfilesCreatorImpl implements ProfilesCreator {
             throw new IllegalArgumentException(errorMessage);
         }
 
-        UUID newProfileUuid = this.createNewProfileUuid();
+        if (requestInput.getUserName() == null || requestInput.getUserName().isEmpty()) {
 
-        // register profile, but skip name and surname
-        // those are not needed for basic profile
-        profilesClient.registerNewProfile(
-                newProfileUuid, requestMessage.getUserName(), requestMessage.getUserEmail(), null, null);
+            String errorMessage = "requestMessage::UserName is null or empty";
 
-        // second call - register profile with user name and password
-        securityClient.registerNewUserCredentials(newProfileUuid, requestMessage.getPasswordHash());
-    }
+            log.error(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
+        }
 
-    private UUID createNewProfileUuid() {
-        return UUID.randomUUID();
+        if (requestInput.getUserEmail() == null || requestInput.getUserEmail().isEmpty()) {
+
+            String errorMessage = "requestMessage::UserEmail is null or empty";
+
+            log.error(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
+        }
+
+        if (requestInput.getPasswordHash() == null || requestInput.getPasswordHash().isEmpty()) {
+
+            String errorMessage = "requestMessage::PasswordHash is null or empty";
+
+            log.error(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
+        }
     }
 }

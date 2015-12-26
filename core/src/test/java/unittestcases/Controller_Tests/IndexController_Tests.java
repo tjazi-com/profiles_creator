@@ -1,6 +1,6 @@
 package unittestcases.Controller_Tests;
 
-import com.tjazi.profilescreator.service.controller.IndexController;
+import com.tjazi.profilescreator.service.endpoints.controller.IndexController;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

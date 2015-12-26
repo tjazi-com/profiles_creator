@@ -1,6 +1,6 @@
 package com.tjazi.profilescreator.service.config;
 
-import com.tjazi.profilescreator.service.endpoint.ProfilesCreatorEndpoint;
+import com.tjazi.profilescreator.service.endpoints.queuehandlers.ProfilesCreatorEndpoint;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
@@ -55,8 +55,10 @@ public class AmqpConfiguration {
 
         container.setConnectionFactory(connectionFactory);
         container.setQueueNames(queueName);
-        container.setMessageListener(new MessageListenerAdapter(profilesCreatorEndpoint, messageConverter));
-        container.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+
+        MessageListenerAdapter messageListenerAdapter = new MessageListenerAdapter(profilesCreatorEndpoint, messageConverter);
+        messageListenerAdapter.setDefaultListenerMethod("createBasicProfileRequestHandler");
+        container.setMessageListener(messageListenerAdapter);
 
         return container;
     }

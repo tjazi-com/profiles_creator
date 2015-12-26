@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="93e8235b-4609-456a-8d82-41c75992ca31" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_core_asl_1_9_13.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_mapper_asl_1_9_13.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/.idea/libraries/Maven__org_codehaus_jackson_jackson_core_asl_1_9_13.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/.idea/libraries/Maven__org_codehaus_jackson_jackson_mapper_asl_1_9_13.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/unittests/ProfilesCreatorClient_Tests.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profiles-creator-cliebt.iml" afterPath="$PROJECT_DIR$/profiles-creator-cliebt.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tjazi/profilescreator/client/ProfilesCreatorClientConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/com/tjazi/profilescreator/client/ProfilesCreatorClientConfiguration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/tjazi/profilescreator/client/ProfilesCreatorClientImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/tjazi/profilescreator/client/ProfilesCreatorClientImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../core/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/core.iml" afterPath="$PROJECT_DIR$/../core/core.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/pom.xml" afterPath="$PROJECT_DIR$/../core/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/src/main/java/com/tjazi/profilescreator/service/Application.java" afterPath="$PROJECT_DIR$/../core/src/main/java/com/tjazi/profilescreator/service/Application.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/src/main/java/com/tjazi/profilescreator/service/config/AmqpConfiguration.java" afterPath="$PROJECT_DIR$/../core/src/main/java/com/tjazi/profilescreator/service/config/AmqpConfiguration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/src/main/java/com/tjazi/profilescreator/service/endpoint/ProfilesCreatorEndpoint.java" afterPath="$PROJECT_DIR$/../core/src/main/java/com/tjazi/profilescreator/service/endpoint/ProfilesCreatorEndpoint.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../core/src/test/java/unittestcases/Controller_Tests/ProfilesCreatorController_Tests.java" afterPath="$PROJECT_DIR$/../core/src/test/java/unittestcases/Controller_Tests/ProfilesCreatorController_Tests.java" />
-    </list>
+    <list default="true" id="93e8235b-4609-456a-8d82-41c75992ca31" name="Default" comment="" />
     <ignored path="profiles-creator-cliebt.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -1213,7 +1195,7 @@
     <option name="totallyTimeSpent" value="17847000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="825" extended-state="1" />
+    <frame x="0" y="23" width="1440" height="825" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
